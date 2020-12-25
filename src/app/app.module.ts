@@ -7,7 +7,8 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { PersonasComponent } from './components/personas/personas.component';
 import { LoginComponent } from './components/login/login.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { NavbarComponent } from './layouts/navbar/navbar.component';
+import { UtilsModule } from './utils/utils.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,13 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
     InicioComponent,
     PersonasComponent,
     LoginComponent,
-    PerfilComponent,
-    NavbarComponent
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,   // AppRoutinModule para navegar entre componentes
+    UtilsModule,        // UtilsModule contiene utilidades como el navbar
+    HttpClientModule    // HttpClientModule para consumir solicitudes HTTP REST
   ],
   providers: [],
   bootstrap: [AppComponent]

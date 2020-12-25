@@ -1,1 +1,20 @@
-<p>inicio works!</p>
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>user</th>
+            <th>text</th>
+            <th>file</th>
+            <th>create_at</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let publicacion of publicaciones">
+            <td>{{publicacion.id}}</td>
+            <td>{{publicacion.user.name}}</td>
+            <td>{{publicacion.text}}</td>
+            <td>{{publicacion.file}}</td>
+            <td>{{publicacion.created_at}}</td>
+        </tr>
+    </tbody>
+</table>
