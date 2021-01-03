@@ -7,7 +7,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'login'},
+  {path: '', pathMatch: 'full', redirectTo: 'inicio'},
   {path: 'login', component: LoginComponent },
   {path: 'inicio', component: InicioComponent },
   {path: 'personas', component: PersonasComponent },

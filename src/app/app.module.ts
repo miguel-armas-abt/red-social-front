@@ -9,6 +9,8 @@ import { LoginComponent } from './components/login/login.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { UtilsModule } from './utils/utils.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,   // AppRoutinModule para navegar entre componentes
     UtilsModule,        // UtilsModule contiene utilidades como el navbar
-    HttpClientModule    // HttpClientModule para consumir solicitudes HTTP REST
+    HttpClientModule, FontAwesomeModule    // HttpClientModule para consumir solicitudes HTTP REST
   ],
   providers: [],
   bootstrap: [AppComponent]
