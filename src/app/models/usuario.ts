@@ -1,4 +1,5 @@
 import { Generic } from "./generic";
+import { Seguidor } from './seguidor';
 
 export class Usuario implements Generic{
 
