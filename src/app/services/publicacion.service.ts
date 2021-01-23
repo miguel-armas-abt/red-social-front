@@ -13,7 +13,7 @@ import { CommonService } from './common.service';
 export class PublicacionService extends CommonService<Publicacion>{
 
   // endpoint de la solicitud
-  protected baseEndpoint = '/api/publicaciones/';
+  protected baseEndpoint = 'http://localhost:3800/api/publicaciones';
 
   // constructor
   constructor(http: HttpClient) {
