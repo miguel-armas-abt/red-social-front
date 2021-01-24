@@ -10,7 +10,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { UtilsModule } from './utils/utils.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { FormsModule } from '@angular/forms';
+import { Appmodule2Component } from './components/appmodule2/appmodule2.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +19,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     InicioComponent,
     PersonasComponent,
     LoginComponent,
-    PerfilComponent
+    PerfilComponent,
+    Appmodule2Component
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,   // AppRoutinModule para navegar entre componentes
     UtilsModule,        // UtilsModule contiene utilidades como el navbar
-    HttpClientModule, FontAwesomeModule    // HttpClientModule para consumir solicitudes HTTP REST
+    HttpClientModule, // HttpClientModule para consumir solicitudes HTTP REST
+    FontAwesomeModule,   //iconos 
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

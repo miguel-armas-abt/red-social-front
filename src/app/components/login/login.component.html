@@ -35,15 +35,15 @@
                             <h1 style="font-size: 2.7hw;">Red social</h1>
                         </div>
                         <div class="col-md-12" style="margin-top: 10%;">
-                            <input type="text" class="form__input"  placeholder="Ingresa tu correo" autofocus required=""  />
+                            <input type="text" [(ngModel)]="usuario.email" class="form__input"  placeholder="Ingresa tu correo"  autofocus />
                             <label for="name" class="form__label">Correo</label>
                         </div>
                         <div class="col-md-12 py-2">
-                            <input class="form__input" type="password" id="name" placeholder="Ingresa tu contraseña" required="" />
-                            <label for="name" class="form__label">Contraseña</label>
+                            <input class="form__input" type="password" id="password" placeholder="Ingresa tu contraseña" [(ngModel)]="usuario.password"  required="" />
+                            <label for="password" class="form__label">Contraseña</label>
                         </div>
                         <div class="col-md-12 text-center">
-                            <a class="boton azul" id="boton-azul">INGRESAR</a>
+                            <a class="boton azul" id="boton-azul" (click)="login()">INGRESAR</a>
                                 
                         </div>
                   

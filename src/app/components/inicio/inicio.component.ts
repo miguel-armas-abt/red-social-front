@@ -20,9 +20,9 @@ export class InicioComponent implements OnInit {
     // toda la comunicacion con el backend se inicializa en el ngOnInit
 
     // obtengo las publicaciones de forma reactiva
-    this.service.listar().subscribe(publicaciones => {
-      this.publicaciones = publicaciones;
-    });
+    // this.service.listar().subscribe(publicaciones => {
+    //   this.publicaciones = publicaciones;
+    // });
   }
 
 }

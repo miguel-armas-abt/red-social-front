@@ -11,15 +11,15 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#" routerLink="/inicio" routerLinkActive=active>INICIO</a>
+          <a class="nav-link" href="#" [routerLink]="[{ outlets: { cuerpo: ['inicio'] } }]" routerLinkActive=active>INICIO</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" routerLink="/personas" routerLinkActive=active>CONTACTOS</a>
+          <a class="nav-link" href="#" [routerLink]="[{ outlets: { cuerpo: ['personas'] } }]" routerLinkActive=active>CONTACTOS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" routerLink="/perfil" routerLinkActive=active>PERFIL</a>
+          <a class="nav-link" href="#" [routerLink]="[{ outlets: { cuerpo: ['perfil'] } }]" routerLinkActive=active>PERFIL</a>
         </li>
       </ul>
     </div>
-    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Salir</button>
+    <button class="btn btn-outline-light my-2 my-sm-0" (click)="logout()" type="submit">Salir</button>
   </nav>

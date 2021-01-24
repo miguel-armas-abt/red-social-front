@@ -9,9 +9,10 @@ export class Usuario implements Generic{
     id: string;
     name: string;
     surname: string;
-    nick: string;
+    nickname: string;
     email: string;
     password: string;
-    rol: string;
+    roles: string;
     image: string;
+    gettoken:boolean=true;
 }
