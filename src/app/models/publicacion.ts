@@ -15,3 +15,4 @@ export class Publicacion implements Generic{
     reacciones: Reaccion[];
     created_at: string;
 }
+    

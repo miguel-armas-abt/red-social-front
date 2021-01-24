@@ -11,7 +11,7 @@ export abstract class CommonService<M extends Generic> {
   // endpoint de la solicitud
   protected baseEndpoint: string;
 
-    // cabecera de la solicitud
+  // cabecera de la solicitud
   protected cabeceras: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   // las instancias se inyectan mediante constructor
