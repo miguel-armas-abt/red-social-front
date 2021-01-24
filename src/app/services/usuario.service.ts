@@ -13,7 +13,7 @@ import { CommonService } from './common.service';
 export class UsuarioService extends CommonService<Usuario>{
 
   // endpoint de la solicitud
-  protected baseEndpoint = '/api/users';
+  protected baseEndpoint = 'http://localhost:3800/api/users';
 
     // constructor
     constructor(http: HttpClient) {

@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { Appmodule2Component } from './components/appmodule2/appmodule2.component';
+import { interceptorProvider } from './interceptors/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { Appmodule2Component } from './components/appmodule2/appmodule2.componen
     FontAwesomeModule,   //iconos 
     FormsModule
   ],
-  providers: [],
+  providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

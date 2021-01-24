@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 
 // import { map } from 'rxjs/operators';
 import { Generic } from '../models/generic';
+import { AuthService } from './auth.service';
 
 // no es necesario el inyectable, ya que es una clase de la que se va a extender
 // M representa es un generico de modelo
@@ -12,7 +13,9 @@ export abstract class CommonService<M extends Generic> {
   protected baseEndpoint: string;
 
   // cabecera de la solicitud
-  protected cabeceras: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  protected cabeceras: HttpHeaders = new HttpHeaders({
+    'Content-Type': 'application/json'
+  });
 
   // las instancias se inyectan mediante constructor
   // HttpClientModule para que el servicio pueda consumir solicitudes HTTP REST
