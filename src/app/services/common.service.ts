@@ -31,7 +31,7 @@ export abstract class CommonService<M extends Generic> {
     );*/
   }
 
-  public obtener(id: number): Observable<M> {
+  public obtener(id: string): Observable<M> {
     return this.http.get<M>(`${this.baseEndpoint}/${id}`)
   }
 
