@@ -36,7 +36,8 @@ export class InicioComponent implements OnInit {
   constructor(
     private publicacionService: PublicacionService,
     private usuarioService: UsuarioService,
-    private comentarioService: CommentService
+    private comentarioService: CommentService,
+    private authService: AuthService
     ) { }
 
   ngOnInit(): void {
@@ -47,8 +48,8 @@ export class InicioComponent implements OnInit {
   onComentar(publicacionCard: PublicacionCard): void {
     this.nuevoComentario = new Comentario();
     this.nuevoComentario.textComment = this.comentario;
-    this.nuevoComentario.postId = publicacionCard.publicacion.id;
-    this.nuevoComentario.userCommentId = publicacionCard.usuario.id;
+    this.nuevoComentario.postId = publicacionCard.publicacion._id;
+    this.nuevoComentario.userCommentId = publicacionCard.usuario._id;
     console.log("se está llamando a onComentar: " + this.nuevoComentario.textComment 
     + " \n" + this.nuevoComentario.postId + "\n" + this.nuevoComentario.userCommentId);
     this.comentarioService.crear(this.nuevoComentario).subscribe(comment =>
@@ -58,7 +59,7 @@ export class InicioComponent implements OnInit {
 
   publicar(): void {
     const publicacion = new Publicacion();
-    // const idUsuario: string = this.authService.usuario.id;
+    // const idUsuario: string = this.authService.usuario._id;
     const idUsuario: string = "600c913aa09e800248164284"
     publicacion.text = this.textoNuevaPublicacion;
     publicacion.user_id = idUsuario;
@@ -99,7 +100,7 @@ export class InicioComponent implements OnInit {
          let usuario = this.usuarioService.obtener(publicacion.user_id)
              .subscribe(usuario => publicacionCard.usuario = usuario);
 
-         let comentarios = this.comentarioService.obtenerPorPublicacion(publicacion.id)
+         let comentarios = this.comentarioService.obtenerPorPublicacion(publicacion._id)
              .subscribe(comentarios => publicacionCard.comentarios = comentarios);
 
          console.log(publicacionCard);

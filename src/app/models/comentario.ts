@@ -6,7 +6,7 @@ export class Comentario implements Generic{
     // los atributos se mapean del json
     // mismos atributos que en el backend
 
-    id: string;
+    _id: string;
     textComment: string;
     commentDate: string;
     userCommentId: string;

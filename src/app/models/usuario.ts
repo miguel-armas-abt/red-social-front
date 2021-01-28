@@ -1,12 +1,12 @@
 import { Generic } from "./generic";
 import { Seguidor } from './seguidor';
 
-export class Usuario implements Generic{
+export class Usuario {
 
     // los atributos se mapean del json
     // mismos atributos que en el backend
 
-    id: string;
+    _id: string;
     name: string;
     surname: string;
     nickname: string;

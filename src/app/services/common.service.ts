@@ -45,7 +45,7 @@ export abstract class CommonService<M extends Generic> {
 
   public editar(model: M): Observable<M> {
     return this.http.put<M>(
-      `${this.baseEndpoint}/${model.id}`,
+      `${this.baseEndpoint}/${model._id}`,
       model,
       {headers: this.cabeceras}
     );

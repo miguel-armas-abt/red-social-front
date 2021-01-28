@@ -5,7 +5,7 @@ export class Publicacion implements Generic{
     // los atributos se mapean del json
     // mismos atributos que en el backend
 
-    id: string;
+    _id: string;
     user_id: string;
     text: string;
     file: string;
