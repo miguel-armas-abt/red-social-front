@@ -19,6 +19,7 @@ import { ToastrModule } from 'ngx-toastr';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {MatCardModule} from '@angular/material/card';
     ToastrModule.forRoot(),
     MatDialogModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    MatExpansionModule
     
   ],
   providers: [interceptorProvider],

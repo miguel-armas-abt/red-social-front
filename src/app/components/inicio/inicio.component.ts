@@ -29,18 +29,17 @@ export class InicioComponent implements OnInit {
 
   textoNuevaPublicacion = "";
 
+  panelOpenState = false;
+
   // las instancias se inyectan mediante constructor
   // PublicacionService para que el componente pueda consumir los servicios de la API /publicaciones
   constructor(
     private publicacionService: PublicacionService,
     private usuarioService: UsuarioService,
-    private comentarioService: CommentService,
-    private toastr: ToastrService,
-    private authService: AuthService
+    private comentarioService: CommentService
     ) { }
 
   ngOnInit(): void {
-
     this.refrescarLista();
   }
 
@@ -108,4 +107,6 @@ export class InicioComponent implements OnInit {
       });
     });
   }
+
+  comentar(): void {}
 }
