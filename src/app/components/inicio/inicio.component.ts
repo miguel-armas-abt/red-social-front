@@ -7,6 +7,10 @@ import { Usuario } from '../../models/usuario';
 import { CommentService } from '../../services/comment.service';
 import { Comentario } from '../../models/comentario';
 
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -23,36 +27,21 @@ export class InicioComponent implements OnInit {
   userCommentId: string;
   postId: string;
 
+  textoNuevaPublicacion = "";
 
   // las instancias se inyectan mediante constructor
   // PublicacionService para que el componente pueda consumir los servicios de la API /publicaciones
   constructor(
     private publicacionService: PublicacionService,
     private usuarioService: UsuarioService,
-    private comentarioService: CommentService
+    private comentarioService: CommentService,
+    private toastr: ToastrService,
+    private authService: AuthService
     ) { }
 
   ngOnInit(): void {
-    // toda la comunicacion con el backend se inicializa en el ngOnInit
 
-    // obtengo las publicaciones de forma reactiva
-    this.publicacionService.listar().subscribe(publicaciones => {
-       
-       publicaciones.forEach(publicacion => {
-
-          let publicacionCard = new PublicacionCard();
-          publicacionCard.publicacion = publicacion;
-
-          let usuario = this.usuarioService.obtener(publicacion.user_id)
-              .subscribe(usuario => publicacionCard.usuario = usuario);
-
-          let comentarios = this.comentarioService.obtenerPorPublicacion(publicacion.id)
-              .subscribe(comentarios => publicacionCard.comentarios = comentarios);
-
-          console.log(publicacionCard);
-          this.publicacionesCards.push(publicacionCard);
-       });
-     });
+    this.refrescarLista();
   }
 
 
@@ -68,4 +57,55 @@ export class InicioComponent implements OnInit {
     );
   }
 
+  publicar(): void {
+    const publicacion = new Publicacion();
+    // const idUsuario: string = this.authService.usuario.id;
+    const idUsuario: string = "600c913aa09e800248164284"
+    publicacion.text = this.textoNuevaPublicacion;
+    publicacion.user_id = idUsuario;
+    console.log(publicacion);
+  
+    this.publicacionService.crear(publicacion).subscribe(publicacion => {
+      Swal.fire('Publicacion creada: ',
+        'Publicacion creada con éxito',
+        'success');
+
+      // refrescar lista
+      this.refrescarLista();
+      this.textoNuevaPublicacion = "";
+    },
+      estado => {
+        if (estado.status === 500) {
+          const mensaje = estado.error.message as string;
+          if (mensaje.indexOf('ConstraintViolationException') > 1) {
+            Swal.fire(
+              'Cuidado',
+              'No se ha podido realizar la publicación',
+              'error'
+            );
+          }
+        }
+      });
+  }
+
+  refrescarLista(): void {
+    // obtengo las publicaciones de forma reactiva
+    this.publicacionService.listar().subscribe(publicaciones => {
+       
+      publicaciones.forEach(publicacion => {
+
+         let publicacionCard = new PublicacionCard();
+         publicacionCard.publicacion = publicacion;
+
+         let usuario = this.usuarioService.obtener(publicacion.user_id)
+             .subscribe(usuario => publicacionCard.usuario = usuario);
+
+         let comentarios = this.comentarioService.obtenerPorPublicacion(publicacion.id)
+             .subscribe(comentarios => publicacionCard.comentarios = comentarios);
+
+         console.log(publicacionCard);
+         this.publicacionesCards.push(publicacionCard);
+      });
+    });
+  }
 }

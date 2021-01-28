@@ -13,6 +13,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { Appmodule2Component } from './components/appmodule2/appmodule2.component';
 import { interceptorProvider } from './interceptors/token-interceptor.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatListModule} from '@angular/material/list';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,13 @@ import { interceptorProvider } from './interceptors/token-interceptor.service';
     UtilsModule,        // UtilsModule contiene utilidades como el navbar
     HttpClientModule, // HttpClientModule para consumir solicitudes HTTP REST
     FontAwesomeModule,   //iconos 
-    FormsModule
+    FormsModule, 
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    MatDialogModule,
+    MatListModule,
+    MatCardModule
+    
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]
