@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg  bg" style="background: #09a0ce;">
+    <a class="navbar-brand" href="#">
+      <img width="40" alt="Angular Logo"
+        src="../../../assets/logo.png" />
+      <b>UNMSM</b> 
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="[{ outlets: { cuerpo: ['inicio'] } }]" routerLinkActive=active>INICIO</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="[{ outlets: { cuerpo: ['personas'] } }]" routerLinkActive=active>CONTACTOS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="[{ outlets: { cuerpo: ['perfil'] } }]" routerLinkActive=active>PERFIL</a>
+        </li>
+      </ul>
+    </div>
+    <button class="btn btn-outline-light my-2 my-sm-0" (click)="logout()" type="submit">Salir</button>
+  </nav>

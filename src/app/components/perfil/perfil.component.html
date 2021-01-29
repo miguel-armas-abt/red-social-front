@@ -1,1 +1,43 @@
-<p>perfil works!</p>
+<div class="container">
+
+    <div class="row align-items-center" style="padding: 3%; margin-top: 5%;">
+      <div class="col-md-3">
+        <img width="130" height="130" src="../../../assets/img2.jpg" alt="" style="border-radius: 100%;">
+      </div>
+      <div class="col-md-9">
+        <div>
+          <h4>{{usuarioActual.name}}</h4>
+          <tr>Sigues a 2 personas</tr>
+          <tr>1 persona te sigue</tr>
+        </div>
+      </div>
+    </div>
+    
+    <mat-card class="example-card publicacion" *ngFor="let publicacionCard of publicacionesCards; index as cont;">
+      <!-- header -->
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+      </mat-card-header>
+  
+      <!-- content -->
+      <mat-card-content>
+        <p class="textoPublicacion">{{publicacionCard.publicacion.text}}</p>
+        <p>{{publicacionCard.comentarios.length}} comentarios</p>
+  
+        <!-- comentarios -->
+        <mat-list role="list" class="comentarios">
+          <mat-list-item role="listitem" *ngFor="let comentario of publicacionCard.comentarios;">{{comentario.textComment}}
+          </mat-list-item>
+        </mat-list>
+  
+        <form (ngSubmit)="comentar(publicacionCard.usuario._id, publicacionCard.publicacion._id, cont)" novalidate #f="ngForm">
+          <div class="form-group">
+            <input type="text" class="form-control" name="nuevoComentarioText" [(ngModel)]="comentarios[cont]"
+              placeholder="Escribe un comentario..." required>
+          </div>
+          <button class="btn btn-outline-success btn-block" [disabled]="!f.valid">Comentar</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  
+</div>

@@ -1,1 +1,50 @@
-<p>inicio works!</p>
+<div class="container">
+
+  <!-- nueva publicacion -->
+  <div class="card publicacion">
+    <div class="card-header">
+      <img width="55" height="55" src="../../../assets/img2.jpg" alt="" style="border-radius: 100%;">
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="publicar()" novalidate #f="ngForm">
+        <div class="form-group">
+          <input type="text" class="form-control" name="textoNuevaPublicacion" [(ngModel)]="textoNuevaPublicacion"
+            required>
+        </div>
+        <button class="btn btn-success btn-block" [disabled]="!f.valid">Publicar</button>
+      </form>
+    </div>
+  </div>
+
+  <mat-card class="example-card publicacion" *ngFor="let publicacionCard of publicacionesCards; index as cont;">
+    <!-- header -->
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{publicacionCard.usuario.name}}</mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- content -->
+    <mat-card-content>
+      <p class="textoPublicacion">{{publicacionCard.publicacion.text}}</p>
+      <p>{{publicacionCard.comentarios.length}} comentarios</p>
+
+      <!-- comentarios -->
+      <mat-list role="list" class="comentarios">
+        <mat-list-item role="listitem" *ngFor="let comentario of publicacionCard.comentarios;">
+          <div>
+            <span style="font-weight: bold;">{{comentario.userCommentId}}:</span> {{comentario.textComment}}
+          </div>
+        </mat-list-item>
+      </mat-list>
+
+      <form (ngSubmit)="comentar(publicacionCard.usuario._id, publicacionCard.publicacion._id, cont)" novalidate #f="ngForm">
+        <div class="form-group">
+          <input type="text" class="form-control" name="nuevoComentarioText" [(ngModel)]="comentarios[cont]"
+            placeholder="Escribe un comentario..." required>
+        </div>
+        <button class="btn btn-outline-success btn-block" [disabled]="!f.valid">Comentar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
