@@ -23,11 +23,10 @@ export class InicioComponent implements OnInit {
   publicacionesCards: PublicacionCard[] = [];
 
   nuevoComentario: Comentario;
-  comentario: string;
-  userCommentId: string;
-  postId: string;
+  comentarios: string[] = [];
 
   textoNuevaPublicacion = "";
+  nuevoComentarioText = "";
 
   panelOpenState = false;
 
@@ -44,17 +43,25 @@ export class InicioComponent implements OnInit {
     this.refrescarLista();
   }
 
+  refrescarLista(): void {
+    // obtengo las publicaciones de forma reactiva
+    this.publicacionesCards = [];
+    this.publicacionService.listar().subscribe(publicaciones => {
+       
+      publicaciones.forEach(publicacion => {
 
-  onComentar(publicacionCard: PublicacionCard): void {
-    this.nuevoComentario = new Comentario();
-    this.nuevoComentario.textComment = this.comentario;
-    this.nuevoComentario.postId = publicacionCard.publicacion._id;
-    this.nuevoComentario.userCommentId = publicacionCard.usuario._id;
-    console.log("se está llamando a onComentar: " + this.nuevoComentario.textComment 
-    + " \n" + this.nuevoComentario.postId + "\n" + this.nuevoComentario.userCommentId);
-    this.comentarioService.crear(this.nuevoComentario).subscribe(comment =>
-      {console.log("Nuevo comentario: " + comment);}
-    );
+         let publicacionCard = new PublicacionCard();
+         publicacionCard.publicacion = publicacion;
+
+         let usuario = this.usuarioService.obtener(publicacion.user_id)
+             .subscribe(usuario => publicacionCard.usuario = usuario);
+
+         let comentarios = this.comentarioService.obtenerPorPublicacion(publicacion._id)
+             .subscribe(comentarios => publicacionCard.comentarios = comentarios);
+
+         this.publicacionesCards.push(publicacionCard);
+      });
+    });
   }
 
   publicar(): void {
@@ -63,8 +70,7 @@ export class InicioComponent implements OnInit {
     const idUsuario: string = "600c913aa09e800248164284"
     publicacion.text = this.textoNuevaPublicacion;
     publicacion.user_id = idUsuario;
-    console.log(publicacion);
-  
+      
     this.publicacionService.crear(publicacion).subscribe(publicacion => {
       Swal.fire('Publicacion creada: ',
         'Publicacion creada con éxito',
@@ -88,26 +94,36 @@ export class InicioComponent implements OnInit {
       });
   }
 
-  refrescarLista(): void {
-    // obtengo las publicaciones de forma reactiva
-    this.publicacionService.listar().subscribe(publicaciones => {
-       
-      publicaciones.forEach(publicacion => {
+  comentar(idUsuario: string, idPublicacion: string, cont): void {
+    const nuevoComentario = new Comentario();
+    // const idUsuario: string = this.authService.usuario._id;
+    console.log(idUsuario);
+    console.log(idPublicacion);
 
-         let publicacionCard = new PublicacionCard();
-         publicacionCard.publicacion = publicacion;
+    nuevoComentario.postId = idPublicacion;
+    nuevoComentario.userCommentId = "600c913aa09e800248164284";
+    nuevoComentario.textComment = this.comentarios[cont];
+     
+    this.comentarioService.crear(nuevoComentario).subscribe(comentario => {
+      Swal.fire('Comentario enviado: ',
+        'Comentario enviado con éxito',
+        'success');
 
-         let usuario = this.usuarioService.obtener(publicacion.user_id)
-             .subscribe(usuario => publicacionCard.usuario = usuario);
-
-         let comentarios = this.comentarioService.obtenerPorPublicacion(publicacion._id)
-             .subscribe(comentarios => publicacionCard.comentarios = comentarios);
-
-         console.log(publicacionCard);
-         this.publicacionesCards.push(publicacionCard);
+      // refrescar lista
+      this.refrescarLista();
+      this.comentarios[cont] = "";
+    },
+      estado => {
+        if (estado.status === 500) {
+          const mensaje = estado.error.message as string;
+          if (mensaje.indexOf('ConstraintViolationException') > 1) {
+            Swal.fire(
+              'Cuidado',
+              'No se ha podido realizar el comentario',
+              'error'
+            );
+          }
+        }
       });
-    });
   }
-
-  comentar(): void {}
 }

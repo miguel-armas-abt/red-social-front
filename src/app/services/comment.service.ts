@@ -17,6 +17,6 @@ export class CommentService extends CommonService<Comentario>{
    }
 
    public obtenerPorPublicacion(postId: string): Observable<Comentario[]> {
-    return this.http.get<Comentario[]>(`${this.baseEndpoint}?postId=${postId}`);
+    return this.http.get<Comentario[]>(`${this.baseEndpoint}/postId/${postId}`);
   }
 }

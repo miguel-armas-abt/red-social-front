@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <mat-card class="example-card publicacion" *ngFor="let publicacionCard of publicacionesCards">
+  <mat-card class="example-card publicacion" *ngFor="let publicacionCard of publicacionesCards; index as cont;">
     <!-- header -->
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
@@ -31,13 +31,13 @@
 
       <!-- comentarios -->
       <mat-list role="list" class="comentarios">
-        <mat-list-item role="listitem" *ngFor="let comentario of publicacionCard.comentarios">{{comentario.textComment}}
+        <mat-list-item role="listitem" *ngFor="let comentario of publicacionCard.comentarios;">{{comentario.textComment}}
         </mat-list-item>
       </mat-list>
 
-      <form (ngSubmit)="comentar()" novalidate #f="ngForm">
+      <form (ngSubmit)="comentar(publicacionCard.usuario._id, publicacionCard.publicacion._id, cont)" novalidate #f="ngForm">
         <div class="form-group">
-          <input type="text" class="form-control" name="comentario" [(ngModel)]="comentario"
+          <input type="text" class="form-control" name="nuevoComentarioText" [(ngModel)]="comentarios[cont]"
             placeholder="Escribe un comentario..." required>
         </div>
         <button class="btn btn-outline-success btn-block" [disabled]="!f.valid">Comentar</button>

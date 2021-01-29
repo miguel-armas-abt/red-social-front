@@ -37,7 +37,6 @@ export class AuthService {
       return this._token;
     }
     return null;
-    
   }
 
   guardarToken(accesstoken: string):void{
