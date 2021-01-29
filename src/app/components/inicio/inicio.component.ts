@@ -24,6 +24,7 @@ export class InicioComponent implements OnInit {
 
   nuevoComentario: Comentario;
   comentarios: string[] = [];
+  nombres: string[] = [];
 
   textoNuevaPublicacion = "";
   nuevoComentarioText = "";
@@ -66,8 +67,7 @@ export class InicioComponent implements OnInit {
 
   publicar(): void {
     const publicacion = new Publicacion();
-    // const idUsuario: string = this.authService.usuario._id;
-    const idUsuario: string = "600c913aa09e800248164284"
+    const idUsuario: string = this.authService.obtenerIdUsuarioActual();
     publicacion.text = this.textoNuevaPublicacion;
     publicacion.user_id = idUsuario;
       
@@ -96,12 +96,12 @@ export class InicioComponent implements OnInit {
 
   comentar(idUsuario: string, idPublicacion: string, cont): void {
     const nuevoComentario = new Comentario();
-    // const idUsuario: string = this.authService.usuario._id;
+    const idUsuarioComment: string = this.authService.obtenerIdUsuarioActual();
     console.log(idUsuario);
     console.log(idPublicacion);
 
     nuevoComentario.postId = idPublicacion;
-    nuevoComentario.userCommentId = "600c913aa09e800248164284";
+    nuevoComentario.userCommentId = idUsuarioComment;
     nuevoComentario.textComment = this.comentarios[cont];
      
     this.comentarioService.crear(nuevoComentario).subscribe(comentario => {

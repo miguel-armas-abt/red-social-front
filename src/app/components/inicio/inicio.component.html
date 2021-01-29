@@ -31,7 +31,10 @@
 
       <!-- comentarios -->
       <mat-list role="list" class="comentarios">
-        <mat-list-item role="listitem" *ngFor="let comentario of publicacionCard.comentarios;">{{comentario.textComment}}
+        <mat-list-item role="listitem" *ngFor="let comentario of publicacionCard.comentarios;">
+          <div>
+            <span style="font-weight: bold;">{{comentario.userCommentId}}:</span> {{comentario.textComment}}
+          </div>
         </mat-list-item>
       </mat-list>
 

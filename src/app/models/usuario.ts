@@ -14,5 +14,6 @@ export class Usuario {
     password: string;
     roles: string;
     image: string;
+    sub: string;
     gettoken:boolean=true;
 }

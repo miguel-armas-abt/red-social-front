@@ -39,6 +39,10 @@ export class AuthService {
     return null;
   }
 
+  public obtenerIdUsuarioActual(): string {
+    return this._usuario.sub;
+  }
+
   guardarToken(accesstoken: string):void{
 
     let payload = this.obtenerDatosToken(accesstoken);
@@ -51,6 +55,7 @@ export class AuthService {
     this._usuario.password = payload.password;
     this._usuario.image = payload.image;
     this._usuario.roles = payload.authorities;
+    this._usuario.sub = payload.sub;
     sessionStorage.setItem('users',JSON.stringify(this._usuario));
   }
 

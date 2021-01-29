@@ -20,4 +20,8 @@ export class PublicacionService extends CommonService<Publicacion>{
     super(http);
    }
 
+   public obtenerPorUsuario(userId: string): Observable<Publicacion[]> {
+    return this.http.get<Publicacion[]>(`${this.baseEndpoint}/user/${userId}`);
+  }
+
 }
