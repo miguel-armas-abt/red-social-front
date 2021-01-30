@@ -10,5 +10,6 @@ export class Comentario implements Generic{
     textComment: string;
     commentDate: string;
     userCommentId: string;
+    userName: string;
     postId: string;
 }

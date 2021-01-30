@@ -21,10 +21,9 @@ export class InicioComponent implements OnInit {
   // todas las publicaciones 
   publicaciones: Publicacion[];
   publicacionesCards: PublicacionCard[] = [];
+  comentarios: string[] = [];
 
   nuevoComentario: Comentario;
-  comentarios: string[] = [];
-  nombres: string[] = [];
 
   textoNuevaPublicacion = "";
   nuevoComentarioText = "";
@@ -45,7 +44,6 @@ export class InicioComponent implements OnInit {
   }
 
   refrescarLista(): void {
-    // obtengo las publicaciones de forma reactiva
     this.publicacionesCards = [];
     this.publicacionService.listar().subscribe(publicaciones => {
        
@@ -58,7 +56,16 @@ export class InicioComponent implements OnInit {
              .subscribe(usuario => publicacionCard.usuario = usuario);
 
          let comentarios = this.comentarioService.obtenerPorPublicacion(publicacion._id)
-             .subscribe(comentarios => publicacionCard.comentarios = comentarios);
+             .subscribe(comentarios => {
+               let  comments: Comentario[] = [];
+               comments = comentarios;
+               comments.forEach(comentario => {
+                  this.usuarioService.obtener(comentario.userCommentId).subscribe(user => {
+                    comentario.userName = user.name;
+                  });
+               });
+               publicacionCard.comentarios = comments;
+              });
 
          this.publicacionesCards.push(publicacionCard);
       });
