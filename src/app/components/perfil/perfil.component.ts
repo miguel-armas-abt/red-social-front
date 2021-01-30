@@ -22,8 +22,8 @@ export class PerfilComponent implements OnInit {
   publicacionesCards: PublicacionCard[] = [];
 
   constructor(
-    private usuarioService: UsuarioService,
     private publicacionService :PublicacionService,
+    private usuarioService: UsuarioService,
     private comentarioService: CommentService,
     private authService: AuthService) { }
 
@@ -40,7 +40,16 @@ export class PerfilComponent implements OnInit {
          publicacionCard.publicacion = publicacion;
 
          let comentarios = this.comentarioService.obtenerPorPublicacion(publicacion._id)
-             .subscribe(comentarios => publicacionCard.comentarios = comentarios);
+             .subscribe(comentarios => {
+               let  comments: Comentario[] = [];
+               comments = comentarios;
+               comments.forEach(comentario => {
+                  this.usuarioService.obtener(comentario.userCommentId).subscribe(user => {
+                    comentario.userName = user.name;
+                  });
+               });
+               publicacionCard.comentarios = comments;
+              });
 
          this.publicacionesCards.push(publicacionCard);
       });

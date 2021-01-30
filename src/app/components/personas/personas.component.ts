@@ -24,32 +24,4 @@ export class PersonasComponent implements OnInit {
     });
   }
 
-  seguir(followId: string): void {
-    const seguidor = new Seguidor();
-    const idUsuario: string = "600c913aa09e800248164284"
-    seguidor.user = idUsuario;
-    seguidor.followed = followId;
-    this.followService.crear(seguidor).subscribe(follow => {
-      Swal.fire('Usuario seguido: ',
-        'Usuario seguido con éxito',
-        'success');
-
-      // refrescar lista
-      // this.refrescarLista();
-      // this.textoNuevaPublicacion = "";
-    },
-      estado => {
-        if (estado.status === 500) {
-          const mensaje = estado.error.message as string;
-          if (mensaje.indexOf('ConstraintViolationException') > 1) {
-            Swal.fire(
-              '¡Ha ocurrido algo inesperado!',
-              'No se ha podido realizar el seguiminento',
-              'error'
-            );
-          }
-        }
-      });
-  }
-
 }
