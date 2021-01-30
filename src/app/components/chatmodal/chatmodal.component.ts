@@ -4,6 +4,8 @@ import { Mensaje } from '../../models/mensaje';
 import { MensajeService } from '../../services/mensaje.service';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
+import { Observable } from 'rxjs';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-chatmodal',
@@ -12,17 +14,30 @@ import Swal from 'sweetalert2';
 })
 export class ChatmodalComponent implements OnInit {
 
-  mensajesEnviados: Mensaje[];
-  mensajesRecibidos: Mensaje[];
+  obsMensajesEnviados: Observable<Mensaje[]>;
+  obsMensajesRecibidos: Observable<Mensaje[]>;
   textoNuevoMensaje: string;
+  mensajesEnviados: Mensaje[] = [];
+  mensajesRecibidos: Mensaje[] = [];
+  nombreUsuarioEmisor: string = "";
+  nombreUsuarioReceptor: string = "";
+  usuarioReceptorId: string = "";
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   public modalRef: MatDialogRef<ChatmodalComponent>,
   private mensajeService: MensajeService,
-  private authService: AuthService) { }
+  private authService: AuthService,
+  private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
     this.refrescarMensajes();
+    this.nombreUsuarioEmisor = this.authService.usuario.name;
+    this.usuarioService.obtener(this.usuarioReceptorId).subscribe(usuarioReceptor => {
+      this.nombreUsuarioReceptor = usuarioReceptor.name;
+      console.log("USUARIO RECEPTOR: ");
+      console.log(usuarioReceptor);
+    });
+
   }
 
   cancelar(): void{
@@ -30,7 +45,8 @@ export class ChatmodalComponent implements OnInit {
   }
 
   enviarMensaje() {
-    let usuarioReceptorId = this.mensajesEnviados[0].idReceiverUser;
+    // let usuarioReceptorId = this.mensajesEnviados[0].idReceiverUser;
+    let usuarioReceptorId = this.usuarioReceptorId;
     let usuarioEmisorId = this.authService.usuario.sub;
     const mensaje = new Mensaje();
     mensaje.idEmitterUser = usuarioEmisorId;
@@ -60,8 +76,10 @@ export class ChatmodalComponent implements OnInit {
   }
 
   refrescarMensajes(): void {
-    this.mensajesEnviados = this.data.msgEnviados as Mensaje[];
-    this.mensajesRecibidos = this.data.msgRecibidos as Mensaje[];
+    this.obsMensajesEnviados = this.data.msgEnviados as Observable<Mensaje[]>;
+    this.obsMensajesRecibidos = this.data.msgRecibidos as Observable<Mensaje[]>;
+    this.usuarioReceptorId = this.data.usuarioReceptorId as string;
+    this.obsMensajesEnviados.subscribe(msgsEnviados => this.mensajesEnviados = msgsEnviados);
+    this.obsMensajesRecibidos.subscribe(msgsRecibidos => this.mensajesRecibidos = msgsRecibidos);
   }
-
 }

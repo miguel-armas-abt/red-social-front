@@ -25,7 +25,7 @@ export class PersonasComponent implements OnInit {
     public dialog: MatDialog,
     private mensajeService: MensajeService,
     private authService: AuthService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.usuarioService.listar().subscribe(usuarios => {
@@ -34,40 +34,26 @@ export class PersonasComponent implements OnInit {
   }
 
   enviarMensaje(usuarioDestinoId: string): void {
-    
-    let mensajesEnviados: Mensaje[] = [];
-    let mensajesRecibidos: Mensaje[] = [];
-
-    this.mensajeService.obtenerMensajesEnviados(
+    let mensajesEnviados = this.mensajeService.obtenerMensajesEnviados(
       this.authService.usuario.sub,
       usuarioDestinoId
-    ).subscribe(msgEnviados => {
-      mensajesEnviados = msgEnviados;
-      console.log("ENVIADOS EN FLUJO:");
-      console.log(mensajesEnviados);
-    });
-    
-    this.mensajeService.obtenerMensajesRecibidos(
+    );
+ 
+
+    let mensajesRecibidos = this.mensajeService.obtenerMensajesRecibidos(
       usuarioDestinoId,
       this.authService.usuario.sub
-    ).subscribe(msgRecibidos => {
-      mensajesRecibidos = msgRecibidos;
-      console.log("RECIBIDOS EN FLUJO:");
-      console.log(mensajesRecibidos);
+    )
+
+    const modalRef = this.dialog.open(ChatmodalComponent, {
+      width: '750px',
+      data: { msgEnviados: mensajesEnviados, msgRecibidos: mensajesRecibidos, usuarioReceptorId: usuarioDestinoId}
     });
 
-    setTimeout(() => {
-
-      const modalRef = this.dialog.open(ChatmodalComponent, {
-        width: '750px',
-        data: {msgEnviados: mensajesEnviados, msgRecibidos: mensajesRecibidos}
-      });
-    },
-    50);
 
 
 
- 
+
   }
 
 }
