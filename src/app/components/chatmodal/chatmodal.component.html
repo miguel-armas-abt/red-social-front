@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Chat</h1>
+<div mat-dialog-content>
+
+    <div *ngFor="let msgEnviado of mensajesEnviados">
+        <p>Emisor: {{msgEnviado.idEmitterUser}}</p>
+        <p>Receptor: {{msgEnviado.idReceiverUser}}</p>
+        <p>Texto: {{msgEnviado.text}}</p>
+        <hr/>
+    </div>
+    <div *ngFor="let msgRecibido of mensajesRecibidos">
+        <p>Emisor: {{msgRecibido.idEmitterUser}}</p>
+        <p>Receptor: {{msgRecibido.idReceiverUser}}</p>
+        <p>Texto: {{msgRecibido.text}}</p>
+        <hr/>
+    </div>
+
+    <form (ngSubmit)="enviarMensaje()" novalidate #f="ngForm">
+        <div class="form-group">
+          <input type="text" class="form-control" name="textoNuevaPublicacion" [(ngModel)]="textoNuevoMensaje"
+          placeholder="Escribe un mensaje..." required>
+        </div>
+        <button class="btn btn-success btn-block" [disabled]="!f.valid">Enviar</button>
+    </form>
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cancelar()">Cancelar</button>
+    <!-- <button mat-button [mat-dialog-close]="respuestas">Enviar</button> -->
+</div>

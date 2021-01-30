@@ -1,14 +1,9 @@
 <div class="container">
-
-  <div *ngFor="let usuario of usuarios" class="usuarios" >
+  <div *ngFor="let usuario of usuarios" class="usuarios">
     <mat-card>
       <div class="row">
         <div class="col">{{usuario.name}}</div>
-        <!--
-        <form (ngSubmit)="seguir(usuario._id)" #f="ngForm">
-          <button class="btn btn-outline-success">Seguir</button>
-        </form>
-        -->
+        <button class="btn btn-outline-success" (click)="enviarMensaje(usuario._id)">Enviar mensaje</button>
       </div>
     </mat-card>
   </div>

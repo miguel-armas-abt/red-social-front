@@ -5,9 +5,9 @@ export class Mensaje implements Generic{
     // los atributos se mapean del json
     // mismos atributos que en el backend
 
-    id: string;
-    emmiter: Usuario;
-    receiver: Usuario;
+    _id: string;
+    idEmitterUser: string;
+    idReceiverUser: string;
     text: string;
     created_at: string;
 }

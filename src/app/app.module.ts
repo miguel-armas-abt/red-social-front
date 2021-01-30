@@ -21,6 +21,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableModule} from '@angular/material/table';
+import { ChatmodalComponent } from './components/chatmodal/chatmodal.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {MatTableModule} from '@angular/material/table';
     PersonasComponent,
     LoginComponent,
     PerfilComponent,
-    Appmodule2Component
+    Appmodule2Component,
+    ChatmodalComponent
   ],
   imports: [
     BrowserModule,
