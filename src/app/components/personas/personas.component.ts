@@ -40,14 +40,14 @@ export class PersonasComponent implements OnInit {
     );
  
 
-    let mensajesRecibidos = this.mensajeService.obtenerMensajesRecibidos(
+    /*let mensajesRecibidos = this.mensajeService.obtenerMensajesRecibidos(
       usuarioDestinoId,
       this.authService.usuario.sub
-    )
+    )*/
 
     const modalRef = this.dialog.open(ChatmodalComponent, {
       width: '750px',
-      data: { msgEnviados: mensajesEnviados, msgRecibidos: mensajesRecibidos, usuarioReceptorId: usuarioDestinoId}
+      data: { msgEnviados: mensajesEnviados, usuarioReceptorId: usuarioDestinoId}
     });
 
 

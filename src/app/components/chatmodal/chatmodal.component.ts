@@ -77,9 +77,10 @@ export class ChatmodalComponent implements OnInit {
 
   refrescarMensajes(): void {
     this.obsMensajesEnviados = this.data.msgEnviados as Observable<Mensaje[]>;
-    this.obsMensajesRecibidos = this.data.msgRecibidos as Observable<Mensaje[]>;
+    //this.obsMensajesRecibidos = this.data.msgRecibidos as Observable<Mensaje[]>;
+
     this.usuarioReceptorId = this.data.usuarioReceptorId as string;
     this.obsMensajesEnviados.subscribe(msgsEnviados => this.mensajesEnviados = msgsEnviados);
-    this.obsMensajesRecibidos.subscribe(msgsRecibidos => this.mensajesRecibidos = msgsRecibidos);
+    //this.obsMensajesRecibidos.subscribe(msgsRecibidos => this.mensajesRecibidos = msgsRecibidos);
   }
 }

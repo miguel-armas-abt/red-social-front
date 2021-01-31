@@ -2,11 +2,7 @@
 <div mat-dialog-content>
 
     <div *ngFor="let msgEnviado of mensajesEnviados">
-        <span style="font-weight: bold;">{{nombreUsuarioEmisor}}: </span>{{msgEnviado.text}}
-        <hr/>
-    </div>
-    <div *ngFor="let msgRecibido of mensajesRecibidos">
-        <span style="font-weight: bold;">{{nombreUsuarioReceptor}}: </span>{{msgRecibido.text}}
+        <span style="font-weight: bold;">{{msgEnviado.name[0]}}: </span>{{msgEnviado.text}}
         <hr/>
     </div>
 
